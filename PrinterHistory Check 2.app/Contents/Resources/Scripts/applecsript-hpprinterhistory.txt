@@ -1,0 +1,21 @@
+global mySult
+try
+	
+	set checkPrinter to "Printing History"
+	
+	set otherAction to "Cancel"
+	
+	display alert "Publish4All" message "What do you want to check!" buttons {otherAction, checkPrinter}
+	
+	set mySult to button returned of the result
+	
+	if (mySult is equal to checkPrinter) then
+		do shell script "cupsctl WebInterface=yes"
+		tell application "Firefox"
+			activate
+			open location "http://localhost:631/jobs?which_jobs=all"
+		end tell
+	end if
+	if (mySult is equal to otherAction) then
+	end if
+end try
